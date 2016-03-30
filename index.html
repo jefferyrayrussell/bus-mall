@@ -2,8 +2,7 @@
 <html>
     <head>
       <title>Bus Mall</title>
-      <link href="css/normalize.css" type="text/css" rel="stylesheet">
-      <link href="css/style.css" type="text/css" rel="stylesheet">
+
     </head>
     <body>
       <header>
@@ -12,24 +11,24 @@
 
       <section>
         <h3>Which of the three would you purchase for yourself or someone else?</h3>
-        <section class="images" id="imagesSection">
-          <img class="image1" id="image1">
-          <img class="image2" id="image2">
-          <img class="image3" id="image3">
+        <section id="Images-Section">
+          <img src="" alt="" id="randomDisplayImageLeft">
+          <img src="" alt="" id="randomDisplayImageMiddle">
+          <img src="" alt="" id="randomDisplayImageRight">
       </section>
 
-      <section id ="listSection">
-        <ul class="listItems" id="list"></ul>
+      <section id ="List-Section">
+        <ul id="list"></ul>
       </section>
 
-      <section id ="buttonSection">
+      <section id ="Button-Section">
         <fieldset>
-            <button type="click" name="button" id="resultsNumberical" hidden= "true">Results</button>
+            <button type="click" name="button" id="resultsNumerical" hidden= "true">Results</button>
         </fieldset>
       <section/>
 
-      <section id ="canvasChartSection">
-          <canvas class="container" id="resultsChart" width="400" height="400"></canvas>
+      <section id ="CanvasChart-Section">
+          <canvas id="resultsChart" width="400" height="400"></canvas>
       </section>
 
         <footer>
