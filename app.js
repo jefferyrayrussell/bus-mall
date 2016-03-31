@@ -112,7 +112,7 @@ that there are not duplicate pictures on the display*/
     totalSelectionsMade ++;
   });
 
-  };
+};
 renderThreeRandomImagesFunction();
 
 /* The function named resultsButtonFunction handles the results buttons.  The
