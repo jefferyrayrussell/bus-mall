@@ -71,9 +71,13 @@ generateRandomImagesIndexFunction = function() {
 
 var renderThreeRandomImagesFunction = function(){
 
-  var randomDisplayImageLeft = document.getElementById('randomDisplayImageLeft');
-  var randomDisplayImageMiddle = document.getElementById('randomDisplayImageMiddle');
-  var randomDisplayImageRight = document.getElementById('randomDisplayImageRight');
+  var imagesContainer = document.getElementById('images-container');
+
+  var randomDisplayImageLeft = document.createElement('img');
+  var randomDisplayImageMiddle = document.createElement('img');
+  var randomDisplayImageRight = document.createElement('img');
+
+  imagesContainer.textContent = '';
 
   imageIndex1 = generateRandomImagesIndexFunction();
   randomDisplayImageLeft.src = testProductImagesArray[imageIndex1].filePath;
@@ -98,6 +102,10 @@ var renderThreeRandomImagesFunction = function(){
   testProductImagesArray[imageIndex3].numberTimesDisplayed ++;
   totalImagesDisplayed ++;
   randomDisplayImageRight.addEventListener('click', handleClickRight);
+
+  imagesContainer.appendChild(randomDisplayImageLeft);
+  imagesContainer.appendChild(randomDisplayImageMiddle);
+  imagesContainer.appendChild(randomDisplayImageRight);
 };
 
 renderThreeRandomImagesFunction();
