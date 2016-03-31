@@ -78,7 +78,8 @@ var renderThreeRandomImagesFunction = function(){
   imageIndex1 = generateRandomImagesIndexFunction();
   randomDisplayImageLeft.src = testProductImagesArray[imageIndex1].filePath;
   testProductImagesArray[imageIndex1].numberTimesDisplayed ++;
-  randomDisplayImageMiddle.addEventListener('click', imageClick);
+  totalImagesDisplayed ++;
+  randomDisplayImageLeft.addEventListener('click', handleClickLeft);
 
   imageIndex2 = generateRandomImagesIndexFunction();
   while (imageIndex1 === imageIndex2) {
@@ -86,7 +87,8 @@ var renderThreeRandomImagesFunction = function(){
   }
   randomDisplayImageMiddle.src = testProductImagesArray[imageIndex2].filePath;
   testProductImagesArray[imageIndex2].numberTimesDisplayed ++;
-  randomDisplayImageMiddle.addEventListener('click',imageClick);
+  totalImagesDisplayed ++;
+  randomDisplayImageMiddle.addEventListener('click', handleClickMiddle);
 
   imageIndex3 = generateRandomImagesIndexFunction();
   while (imageIndex1 === imageIndex2 || imageIndex2 === imageIndex3 || imageIndex3 === imageIndex1) {
@@ -94,20 +96,40 @@ var renderThreeRandomImagesFunction = function(){
   }
   randomDisplayImageRight.src = testProductImagesArray[imageIndex3].filePath;
   testProductImagesArray[imageIndex3].numberTimesDisplayed ++;
-  randomDisplayImageRight.addEventListener('click', imageClick);
+  totalImagesDisplayed ++;
+  randomDisplayImageRight.addEventListener('click', handleClickRight);
 };
 
 renderThreeRandomImagesFunction();
 
-/*The function imageClick is triggered when a favorite product image is clicked.
-This trigger result in a number added to the numberTimesSelected total as well
-as the totalSelectionsMade.*/
+/*The functions, handleClickLeft, handleClickMiddle, and handleClickRight are
+triggered when the respective image is clicked. This trigger results in an
+increase to the numberTimesSelected as well as calling the
+handleUniversalClickFunction. The handleUniversalClickFunction adds to
+totalSelectionsMadeas well as calling again the renderThreeRandomImagesFunction.*/
 
-/*function imageClick (){
-  handleClick(testProductImagesArray[imageIndex3]);
-  testProductImagesArray[imageIndex3].numberTimesSelected++;
+handleUniversalClick = function(){
   totalSelectionsMade ++;
-};*/
+  console.log('The variable totalSelectionsMade equals ' + totalSelectionsMade);
+  console.log('The variable totalImagesDisplayed equals ' + totalImagesDisplayed);
+  renderThreeRandomImagesFunction();
+};
+
+function handleClickLeft(event) {
+  testProductImagesArray[imageIndex1].numberTimesSelected++;
+  console.log(testProductImagesArray[imageIndex1]);
+  handleUniversalClick();
+}
+function handleClickMiddle(event) {
+  testProductImagesArray[imageIndex2].numberTimesSelected++;
+  console.log(testProductImagesArray[imageIndex2]);
+  handleUniversalClick();
+}
+function handleClickRight(event) {
+  testProductImagesArray[imageIndex3].numberTimesSelected++;
+  console.log(testProductImagesArray[imageIndex3]);
+  handleUniversalClick();
+}
 
 /* The function named resultsButtonFunction handles the results buttons.  The
 button itself should only be displayed after the user has made 25 selections.
