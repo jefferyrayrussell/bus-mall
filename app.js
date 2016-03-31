@@ -1,6 +1,6 @@
 console.log('javascript works');
 
-//global variables.
+//The global variables are identified below.
 var testProductImagesArray = [];
 var displayTestProductImagesArray = [];
 
@@ -56,28 +56,20 @@ var wineglass = new TestProduct('Blown Wine Glass', 'img/wineGlass.jpg');
 console.log(testProductImagesArray);
 
 /*The generateRandomImagesFunction is used to access the testProductImagesArray
-and select three random images to be displayed on the page.*/
+and select three random images to be displayed on the page and stored in three
+variables. The renderThreeRandomImagesFunctionadds content to that image element
+by randomly assigning it an image from the testProductImagesArray. In addition,
+the number of times the image is displayed is also stored back in the object
+property numberTimesDisplayed. The total images displayed and the total images
+selected are also kept track of. The images are made clickable with an
+addEventListener. The while statements insure that there are not
+duplicate pictures on the display.*/
 
 generateRandomImagesIndexFunction = function() {
   return Math.floor(Math.random() * testProductImagesArray.length);
 };
 
-/* The renderThreeRandomImages function places three random product images stored
-in three variables on the page. First, the function gets an image element with a
-certain Id on the html page so that it can be given content.  Second, the function
-adds content to that image element by randomly assigning it an image from the
-testProductImagesArray.*/
-
 var renderThreeRandomImagesFunction = function(){
-
-/*First, the function gets three image elements with a certain Id on the html page
-so that it can be given content. Second, the function adds content to each
-image element by randomly assigning it an image from the testProductImagesArray.
-It does so by using the generateRandomImagesIndexFunction to get a random number to
-place in the array and to randomly call forth an image by means of it's file
-path. In addition, the number of times the image is displayed is also stored
-back in the object property numberTimesDisplayed. The while statements insure
-that there are not duplicate pictures on the display*/
 
   var randomDisplayImageLeft = document.getElementById('randomDisplayImageLeft');
   var randomDisplayImageMiddle = document.getElementById('randomDisplayImageMiddle');
@@ -86,9 +78,7 @@ that there are not duplicate pictures on the display*/
   imageIndex1 = generateRandomImagesIndexFunction();
   randomDisplayImageLeft.src = testProductImagesArray[imageIndex1].filePath;
   testProductImagesArray[imageIndex1].numberTimesDisplayed ++;
-  randomDisplayImageMiddle.addEventListener('click', function(){
-    handleClick(testProductImagesArray[imageIndex1]);
-  });
+  randomDisplayImageMiddle.addEventListener('click', imageClick);
 
   imageIndex2 = generateRandomImagesIndexFunction();
   while (imageIndex1 === imageIndex2) {
@@ -96,9 +86,7 @@ that there are not duplicate pictures on the display*/
   }
   randomDisplayImageMiddle.src = testProductImagesArray[imageIndex2].filePath;
   testProductImagesArray[imageIndex2].numberTimesDisplayed ++;
-  randomDisplayImageMiddle.addEventListener('click', function(){
-    handleClick(testProductImagesArray[imageIndex2]);
-  });
+  randomDisplayImageMiddle.addEventListener('click',imageClick);
 
   imageIndex3 = generateRandomImagesIndexFunction();
   while (imageIndex1 === imageIndex2 || imageIndex2 === imageIndex3 || imageIndex3 === imageIndex1) {
@@ -106,21 +94,27 @@ that there are not duplicate pictures on the display*/
   }
   randomDisplayImageRight.src = testProductImagesArray[imageIndex3].filePath;
   testProductImagesArray[imageIndex3].numberTimesDisplayed ++;
-  randomDisplayImageRight.addEventListener('click', function(){
-    handleClick(testProductImagesArray[imageIndex3]);
-    testProductImagesArray[imageIndex3].numberTimesSelected++;
-    totalSelectionsMade ++;
-  });
+  randomDisplayImageRight.addEventListener('click', imageClick);
+};
 
-  };
 renderThreeRandomImagesFunction();
+
+/*The function imageClick is triggered when a favorite product image is clicked.
+This trigger result in a number added to the numberTimesSelected total as well
+as the totalSelectionsMade.*/
+
+/*function imageClick (){
+  handleClick(testProductImagesArray[imageIndex3]);
+  testProductImagesArray[imageIndex3].numberTimesSelected++;
+  totalSelectionsMade ++;
+};*/
 
 /* The function named resultsButtonFunction handles the results buttons.  The
 button itself should only be displayed after the user has made 25 selections.
 At that time two buttons will appear.  One will allow the participant to see
 the results. The other allows the user to make 10 more selections.*/
 
-function makeMoreSelectionsButton() {
+/*function makeMoreSelectionsButton() {
   if(totalSelectionsMade < 25) {
     document.getElementById('moreSelectionsButton').style.visibility = 'hidden';
   } else {
@@ -145,3 +139,4 @@ function hideImagesSection() {
     document.getElementById('Images-Section').style.display = 'none';
   }
 };
+*/

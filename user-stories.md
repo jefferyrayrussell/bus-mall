@@ -4,6 +4,7 @@
 1. I desire an attractive user friendly market research app that not only gathers marketing information but effectively markets our brand to potential customers.
 2. I desire an app to display potential products to bus riders and receives feedback as to which are the most popular choices for purchase.
 3. I desire the app to return not only the number of times a particular item is selected, but also the percentage of the time it is selected when shown.
+4. I desire that the click percentages data be visually represented.
 
 ## As the DEVELOPER of the Bus-Mall market research app:
 1. I will develop an attractive functioning market research app.
@@ -16,7 +17,8 @@
       * the total number of times an image was displayed.
       * the total number of clicks received.
       * the percentage of times an item was clicked when it was shown.
-  * the data gathered for each image will be displayed in a colorful chart.
+  * the data gathered for each image will be displayed in a colorful bar chart using ChartJs and placed below the area of the three images.
+  * the results will be given ongoing persistence through a page refresh or a browser closing, by being preserved in local storage.
 
 ## As a USER of the Bus-Mall market research app:
 1. I will have an easy, positive, fun interaction with this app.
