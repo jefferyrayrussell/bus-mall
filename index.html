@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>buttonsMall</title>
-      <link href="css/normalize.css" type="text/css" rel="stylesheet">
-      <link href="css/style.css" type="text/css" rel="stylesheet">
+      <title>Bus-Mall</title>
+      <link href="style.css" type="text/css" rel="stylesheet">
     </head>
     <body>
       <header>
-        <h1>Bus-Mall wants to know what you like!</h1>
+        <h1>Bus-Mall wants to know what catches your eye!</h1>
       <header>
-      <section>
-        <p>Which of the three would you purchase for yourself or someone else?</p>
-        
 
-        <img src="img/bag.jpg" alt="R2D2-Luggage-Bag" id="item1" class="track-images">
-        <img src="img/banana.jpg" alt="Banana-Slicer" id="item2" class="track-images">
-        <img src="img/bathroom.jpg" alt="Tablet-TPHolder" id="item3" class="track-images">
+      <section>
+        <h3>Which of these three do you like the best?
+        Pick and Click.</h3>
+          <section id="Images-Section">
+            <img src="" alt="" id="randomDisplayImageLeft">
+            <img src="" alt="" id="randomDisplayImageMiddle">
+            <img src="" alt="" id="randomDisplayImageRight">
+          </section>
       </section>
+
+      <section id="List-Section">
+        <ul id="list"></ul>
+      </section>
+
+      <section id="Button-Section">
+        <fieldset>
+            <button type="click" name="button" id="moreSelectionsButton" hidden= "true">
+              Ten More Selections</button>
+            <button type="click" name="button" id="seeResultsButton" hidden= "true">
+              See Results Now</button>
+        </fieldset>
+      <section/>
+
+      <section id="CanvasChart-Section">
+          <canvas id="resultsChart" width="400" height="400"></canvas>
+      </section>
+
         <footer>
          <script src="app.js" type="text/javascript"></script>
       </footer>
