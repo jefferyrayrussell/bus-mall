@@ -80,7 +80,7 @@ generateRandomImagesIndexFunction = function() {
 
 var renderThreeRandomImagesFunction = function(){
 
-  var imagesContainer = document.getElementById('images-container');
+  var imagesContainer = document.getElementById('imagesContainer');
 
   var randomDisplayImageLeft = document.createElement('img');
   var randomDisplayImageMiddle = document.createElement('img');
@@ -164,7 +164,7 @@ function buttonDisplay () {
     tenMoreSelectionsButton.style.display = 'block';
   } else if (totalSelectionsMade = 15){
     console.log('Total number of selections: ' + totalSelectionsMade);
-    CALLRESULTSFUNCTION();
+    //CALLRESULTSFUNCTION();
   }
   else {
     seeResultsButton.style.display = 'none';
@@ -184,6 +184,25 @@ function handleTenMoreSelectionsButtonSelect(event){
   tenMoreSelectionsButton.style.display = 'none';
   renderThreeRandomImagesFunction();
 }
+
+function handleSeeResultsButtonSelect(event){
+  seeResultsButton.style.display = 'none';
+  console.log('show me the results now dammit!');
+  createTestProductReport();
+}
+
+var reportListContainer = document.getElementById('report-list-container');
+function createTestProductReport() {
+  testProductReport.textContent = '';
+  var testProductReport = document.createElement('ul');
+  for (var i = 0; i < allProductsArray.length; i++) {
+    allProducts[i].calculatePercentageSelected();
+    var testProductReport = document.createElement('li');
+    testProductReport.textContent = allProducts[i].testProductName + ' has receieved ' + allProducts[i].numberTimesSelected + ' selections after being displayed ' + allProducts[i].numberTimesDisplayed + ' times, for a ' + allProducts[i].calculatePercentageSelected() + '% selection rate';
+    testProductReport.appendChild(reportlistContainer);
+  }
+}
+
 /*function handleButtonClick(event) {
   if (alreadyDisplayed.length<14) {
     resultsButton.textContent = 'Display Updated Results';
@@ -199,11 +218,12 @@ function handleTenMoreSelectionsButtonSelect(event){
 }
 */
 
-
 var clearLocalStorage = document.getElementById('clearLocalStorage');
 var handleResetMemory = function() {
   console.log('Resetting Local Storage Memory');
   localStorage.clear();
+  totalSelectionsMade = 0;
+  totalImagesDisplayed = 0;
 };
 
 clearLocalStorage.addEventListener('click', handleResetMemory);
