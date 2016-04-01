@@ -80,7 +80,7 @@ generateRandomImagesIndexFunction = function() {
 
 var renderThreeRandomImagesFunction = function(){
 
-  var imagesContainer = document.getElementById('imagesContainer');
+  var imagesContainer = document.getElementById('images-container');
 
   var randomDisplayImageLeft = document.createElement('img');
   var randomDisplayImageMiddle = document.createElement('img');
@@ -153,33 +153,63 @@ function handleClickRight(event) {
 
 /*After 25 selections two buttons appear.  One button asks the user to see
 results and the other button asks to make 10 more selections.*/
+/*
+removeImagesFunction = function (){
+  var parent = document.getElementById(imagesContainer);
+  var child = document.getElementById(randomDisplayImageLeft);
+  parent.removeChild(randomDisplayImageLeft);
+  var child = document.getElementById(randomDisplayImageMiddle);
+  parent.removeChild(randomDisplayImageMiddle);
+  var child = document.getElementById(randomDisplayImageRight);
+  parent.removeChild(randomDisplayImageRight);
+};
+*/
+var buttonsContainer = document.getElementById('buttons-container');
 
-var tenMoreSelectionsButton = document.getElementById('moreSelectionsButton');
-var seeResultsButton = document.getElementById('seeResultsButton');
-buttonDisplay();
-function buttonDisplay () {
-  if (totalSelectionsMade = 5) {
-    console.log('Total number of selections: ' + totalSelectionsMade);
-    seeResultsButton.style.display = 'block';
-    tenMoreSelectionsButton.style.display = 'block';
-  } else if (totalSelectionsMade = 15){
-    console.log('Total number of selections: ' + totalSelectionsMade);
-    //CALLRESULTSFUNCTION();
-  }
-  else {
-    seeResultsButton.style.display = 'none';
-    tenMoreSelectionsButton.style.display = 'none';
-  }
-}
+var clearMemoryButton = document.createElement('button');
+var tenSelectionsButton = document.createElement('button');
+var inspectResultsButton = document.createElement('button');
 
-/* The two buttons above require event listeners and handlers. */
+buttonsContainer.appendChild(clearMemoryButton);
+buttonsContainer.appendChild(tenSelectionsButton);
+buttonsContainer.appendChild(inspectResultsButton);
 
+clearMemoryButton.addEventListener('click', handleClearMemoryButton);
 seeResultsButton.addEventListener('click', handleSeeResultsButtonSelect);
 tenMoreSelectionsButton.addEventListener('click', handleTenMoreSelectionsButtonSelect);
 
+var clearLocalStorage = document.getElementById('clearLocalStorage');
+clearLocalStorage.addEventListener('click', handleResetMemory);
+var handleResetMemory = function() {
+  console.log('Resetting Local Storage Memory');
+  localStorage.clear();
+  totalSelectionsMade = 0;
+  totalImagesDisplayed = 0;
+};
+
+if(totalSelectionsMade < 25) {
+  console.log('Total number of selections: ' + totalSelectionsMade);
+  seeResultsButton.style.display = 'none';
+  tenMoreSelectionsButton.style.display = 'none';
+} else if (totalSelectionsMade = 25) {
+  seeResultsButton.style.display = 'block';
+  tenMoreSelectionsButton.style.display = 'block';
+  console.log('Total number of selections: ' + totalSelectionsMade);
+} else if (totalSelectionsMade < 35) {
+  seeResultsButton.style.display = 'block';
+  console.log('Total number of selections: ' + totalSelectionsMade);
+} else {
+  console.log('Total number of selections: ' + totalSelectionsMade);
+  removeImagesFunction();
+  seeResultsButton.style.display = 'none';
+  tenMoreSelectionsButton.style.display = 'block';
+}
+
+/*The two buttons above require event listeners and handlers. */
+
 /* If the handleTenMoreSelectionsButtonSelect is clicked, then the user receives
 ten more selections. */
-
+/*
 function handleTenMoreSelectionsButtonSelect(event){
   tenMoreSelectionsButton.style.display = 'none';
   renderThreeRandomImagesFunction();
@@ -187,10 +217,12 @@ function handleTenMoreSelectionsButtonSelect(event){
 
 function handleSeeResultsButtonSelect(event){
   seeResultsButton.style.display = 'none';
+  removeImagesFunction();
   console.log('show me the results now dammit!');
   createTestProductReport();
 }
-
+*/
+/*
 var reportListContainer = document.getElementById('report-list-container');
 function createTestProductReport() {
   testProductReport.textContent = '';
@@ -202,28 +234,4 @@ function createTestProductReport() {
     testProductReport.appendChild(reportlistContainer);
   }
 }
-
-/*function handleButtonClick(event) {
-  if (alreadyDisplayed.length<14) {
-    resultsButton.textContent = 'Display Updated Results';
-    var resultsDisplay = document.getElementById('resultsDisplay');
-    renderList();
-  } else {
-    resultsButton.textContent = 'Display Updated Results';
-    var resultsDisplay = document.getElementById('resultsDisplay');
-    resultsDisplay.textContent = 'Left chart displays # of times each item was picked by user AND # of times user was shown each item. Right chart displays the % of the time the user chose each item (times it was clicked/times user was shown item)';
-    createRawClicksChart();
-    createPercentClickedChart();
-  }
-}
 */
-
-var clearLocalStorage = document.getElementById('clearLocalStorage');
-var handleResetMemory = function() {
-  console.log('Resetting Local Storage Memory');
-  localStorage.clear();
-  totalSelectionsMade = 0;
-  totalImagesDisplayed = 0;
-};
-
-clearLocalStorage.addEventListener('click', handleResetMemory);
