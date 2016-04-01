@@ -2,7 +2,7 @@ console.log('javascript works');
 
 //The global variables are identified below.
 var testProductImagesArray = [];
-var displayTestProductImagesArray = [];
+var allProductsArray = [];
 
 var totalImagesDisplayed = 0;
 var totalSelectionsMade = 0;
@@ -15,7 +15,8 @@ var randomDisplayImageRight;
 of TestProduct and contain the properties of : testProductName, filePath,
 numberTimesDisplayed, numberTimesSelected, percentageTimesSelected. The property
 testProductImagesArray is an array containing each of the other properties of
-the object.*/
+the object. The twenty product variables are used as arguments to
+create objects with the TestProduct constructor.*/
 
 function TestProduct(testProductName, filePath) {
   this.testProductName = testProductName;
@@ -25,35 +26,43 @@ function TestProduct(testProductName, filePath) {
   testProductImagesArray.push(this);
 }
 
-/* Twenty TestProduct objects are created using the TestProduct constructor above
-and the arguments provided below. Each instance of the constructor is stored in
-a variable. */
+TestProduct.prototype.calculatePercentageSelected = function() {
+  return(this.numberTimesSelected / this.numberTimesDisplayed).toFixed(2) * 100;
+};
 
-var bag = new TestProduct('R2D2 Luggage', 'img/bag.jpg');
-var banana = new TestProduct('Banana Slicer', 'img/banana.jpg');
-var bathroom = new TestProduct('Ipad TP Roll Holder', 'img/bathroom.jpg');
-var boots = new TestProduct('Open Toed Rain Boots', 'img/boots.jpg');
-var breakfast = new TestProduct('Breakfast Appliance', 'img/breakfast.jpg');
+var allProductsArray = [
+  new TestProduct('R2D2 Luggage', 'img/bag.jpg'),
+  new TestProduct('Banana Slicer', 'img/banana.jpg'),
+  new TestProduct('Ipad TP Roll Holder', 'img/bathroom.jpg'),
+  new TestProduct('Open Toed Rain Boots', 'img/boots.jpg'),
+  new TestProduct('Breakfast Appliance', 'img/breakfast.jpg'),
+  new TestProduct('Meatball Bubblegum', 'img/bubblegum.jpg'),
+  new TestProduct('Domed Chair', 'img/chair.jpg'),
+  new TestProduct('Cthulhu Play Figure', 'img/cthulhu.jpg'),
+  new TestProduct('Dog Duck Mask', 'img/dogDuck.jpg'),
+  new TestProduct('Dragon Meat', 'img/dragon.jpg'),
+  new TestProduct('Utensil Pens', 'img/pen.jpg'),
+  new TestProduct('Pet Floor Dusters', 'img/petSweep.jpg'),
+  new TestProduct('Pizza Scissors', 'img/scissors.jpg'),
+  new TestProduct('Shark Sleeping Bag', 'img/shark.jpg'),
+  new TestProduct('Baby Floor Sweeper', 'img/sweep.png'),
+  new TestProduct('Dog Sleeping Bag', 'img/tauntaun.jpg'),
+  new TestProduct('Unicorn Meat', 'img/unicorn.jpg'),
+  new TestProduct('Tentacle USB', 'img/usb.gif'),
+  new TestProduct('Watering Can', 'img/waterCan.jpg'),
+  new TestProduct('Blown Wine Glass', 'img/wineGlass.jpg'),
+];
 
-var bubblegum = new TestProduct('Meatball Bubblegum', 'img/bubblegum.jpg');
-var chair = new TestProduct('Domed Chair', 'img/chair.jpg');
-var cthulhu = new TestProduct('Cthulhu Play Figure', 'img/cthulhu.jpg');
-var dogduck = new TestProduct('Dog Duck Mask', 'img/dogDuck.jpg');
-var dragon = new TestProduct('Dragon Meat', 'img/dragon.jpg');
+console.log(allProductsArray);
 
-var pen = new TestProduct('Utensil Pens', 'img/pen.jpg');
-var petsweep = new TestProduct('Pet Floor Dusters', 'img/petsweep.jpg');
-var scissors = new TestProduct('Pizza Scissors', 'img/scissors.jpg');
-var shark = new TestProduct('Shark Sleeping Bag', 'img/shark.jpg');
-var sweep = new TestProduct('Baby Floor Sweeper', 'img/sweep.png');
-
-var tauntaun = new TestProduct('Dog Sleeping Bag', 'img/tauntaun.jpg');
-var unicorn = new TestProduct('Unicorn Meat', 'img/unicorn.jpg');
-var usb = new TestProduct('Tentacle USB', 'img/usb.gif');
-var watercan = new TestProduct('Watering Can', 'img/waterCan.jpg');
-var wineglass = new TestProduct('Blown Wine Glass', 'img/wineGlass.jpg');
-
-console.log(testProductImagesArray);
+var testProductData = localStorage.getItem('dataPersist');
+if (testProductData) {
+  allProductsArray = JSON.parse(testProductData);
+  console.log('Local Storage Has Data');
+} else {
+  console.log('Local Storage is Empty and is Initializing.');
+  localStorage.setItem('dataPersist', JSON.stringify(allProductsArray));
+}
 
 /*The generateRandomImagesFunction is used to access the testProductImagesArray
 and select three random images to be displayed on the page and stored in three
@@ -121,6 +130,7 @@ handleUniversalClick = function(){
   console.log('The variable totalSelectionsMade equals ' + totalSelectionsMade);
   console.log('The variable totalImagesDisplayed equals ' + totalImagesDisplayed);
   renderThreeRandomImagesFunction();
+  localStorage.setItem('dataPersist', JSON.stringify(allProductsArray));
 };
 
 function handleClickLeft(event) {
@@ -128,45 +138,23 @@ function handleClickLeft(event) {
   console.log(testProductImagesArray[imageIndex1]);
   handleUniversalClick();
 }
+
 function handleClickMiddle(event) {
   testProductImagesArray[imageIndex2].numberTimesSelected++;
   console.log(testProductImagesArray[imageIndex2]);
   handleUniversalClick();
 }
+
 function handleClickRight(event) {
   testProductImagesArray[imageIndex3].numberTimesSelected++;
   console.log(testProductImagesArray[imageIndex3]);
   handleUniversalClick();
 }
 
-/* The function named resultsButtonFunction handles the results buttons.  The
-button itself should only be displayed after the user has made 25 selections.
-At that time two buttons will appear.  One will allow the participant to see
-the results. The other allows the user to make 10 more selections.*/
-
-/*function makeMoreSelectionsButton() {
-  if(totalSelectionsMade < 25) {
-    document.getElementById('moreSelectionsButton').style.visibility = 'hidden';
-  } else {
-    document.getElementById('moreSelectionsButton').style.visibility = 'visible';
-    makeMoreSelectionsButton.addEventListener('click', handleButtonClick);
-  }
+var clearLocalStorage = document.getElementById('clearLocalStorage');
+var handleResetMemory = function() {
+  console.log('Resetting Local Storage Memory');
+  localStorage.clear();
 };
 
-function getResultsButton() {
-  if(totalSelectionsMade < 25) {
-    document.getElementById('seeResultsButton').style.visibility = 'hidden';
-  } else {
-    document.getElementById('seeResultsButton').style.visibility = 'visible';
-    getResultsButton.addEventListener('click', handleButtonClick);
-  }
-};
-
-function hideImagesSection() {
-  if(totalSelectionsMade < 25) {
-    document.getElementById('Images-Section').style.display = 'block';
-  } else {
-    document.getElementById('Images-Section').style.display = 'none';
-  }
-};
-*/
+clearLocalStorage.addEventListener('click', handleResetMemory);
