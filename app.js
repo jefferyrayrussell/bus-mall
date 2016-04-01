@@ -151,6 +151,55 @@ function handleClickRight(event) {
   handleUniversalClick();
 }
 
+/*After 25 selections two buttons appear.  One button asks the user to see
+results and the other button asks to make 10 more selections.*/
+
+var tenMoreSelectionsButton = document.getElementById('moreSelectionsButton');
+var seeResultsButton = document.getElementById('seeResultsButton');
+buttonDisplay();
+function buttonDisplay () {
+  if (totalSelectionsMade = 5) {
+    console.log('Total number of selections: ' + totalSelectionsMade);
+    seeResultsButton.style.display = 'block';
+    tenMoreSelectionsButton.style.display = 'block';
+  } else if (totalSelectionsMade = 15){
+    console.log('Total number of selections: ' + totalSelectionsMade);
+    CALLRESULTSFUNCTION();
+  }
+  else {
+    seeResultsButton.style.display = 'none';
+    tenMoreSelectionsButton.style.display = 'none';
+  }
+}
+
+/* The two buttons above require event listeners and handlers. */
+
+seeResultsButton.addEventListener('click', handleSeeResultsButtonSelect);
+tenMoreSelectionsButton.addEventListener('click', handleTenMoreSelectionsButtonSelect);
+
+/* If the handleTenMoreSelectionsButtonSelect is clicked, then the user receives
+ten more selections. */
+
+function handleTenMoreSelectionsButtonSelect(event){
+  tenMoreSelectionsButton.style.display = 'none';
+  renderThreeRandomImagesFunction();
+}
+/*function handleButtonClick(event) {
+  if (alreadyDisplayed.length<14) {
+    resultsButton.textContent = 'Display Updated Results';
+    var resultsDisplay = document.getElementById('resultsDisplay');
+    renderList();
+  } else {
+    resultsButton.textContent = 'Display Updated Results';
+    var resultsDisplay = document.getElementById('resultsDisplay');
+    resultsDisplay.textContent = 'Left chart displays # of times each item was picked by user AND # of times user was shown each item. Right chart displays the % of the time the user chose each item (times it was clicked/times user was shown item)';
+    createRawClicksChart();
+    createPercentClickedChart();
+  }
+}
+*/
+
+
 var clearLocalStorage = document.getElementById('clearLocalStorage');
 var handleResetMemory = function() {
   console.log('Resetting Local Storage Memory');
