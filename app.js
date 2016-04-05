@@ -237,3 +237,77 @@ function createTestProductReport() {
   }
 }
 */
+/*
+/*result reporting in list and chart*/
+var listContainer = document.getElementById('list-container');
+
+function renderList() {
+  resultsDisplay.textContent = '';
+  //var errorMessage = document.createElement('p');
+  //errorMessage.textContent = 'You can click "Display Updated Results" to render this in a chart once //all ' + allProducts.length + ' products have been displayed at least once (you will have to click an //item one last time once your final item appears before updating as well). Thus far, ' + //alreadyDisplayed.length + ' products have been displayed.';
+  resultsDisplay.appendChild(listContainer);
+  var displayList = document.createElement('ul');
+  for (var i = 0; i < allProducts.length; i++) {
+    allProducts[i].findPercentClicked();
+    var productResults = document.createElement('li');
+    productResults.textContent = allProducts[i].productName + ' has receieved ' + allProducts[i].timesClicked + ' clicks after being displayed ' + allProducts[i].timesDisplayed + ' times, for a ' + allProducts[i].findPercentClicked() + '% selection rate';
+    displayList.appendChild(productResults);
+  }
+  resultsDisplay.appendChild(displayList);
+}
+
+function createRawClicksChart() {
+  var rawBarData = {
+    labels : [],
+    datasets : [
+      {
+        fillColor : '#B1FFFF',
+        strokeColor : 'black',
+        data : []
+      },
+      {
+        fillColor: '#0E00C4',
+        strokeColor: 'black',
+        data: []
+      }
+    ]
+  };
+  for (var i = 0; i < allProducts.length; i++) {
+    rawBarData.labels.push(allProducts[i].productName);
+    rawBarData.datasets[0].data.push(allProducts[i].timesClicked);
+    rawBarData.datasets[1].data.push(allProducts[i].timesDisplayed);
+  }
+  var rawResults = document.getElementById('rawResultsChart').getContext('2d');
+  new Chart(rawResults).Bar(rawBarData);
+}
+function createPercentClickedChart() {
+  var percentBarData = {
+    labels: [],
+    datasets: [
+      {
+        fillColor: '#B1FFFF',
+        strokeColor: 'black',
+        data: []
+      },
+    ]
+  };
+  for (var i = 0; i < allProductsArray.length; i ++) {
+    percentBarData.labels.push(allProducts[i].textProductName);
+    percentBarData.datasets[0].data.push(allProducts[i].findPercentClicked());
+  }
+  var percentResults = document.getElementById('percentResultsChart').getContext('2d');
+  new Chart(percentResults).Bar(percentBarData);
+}
+function handleButtonClick(event) {
+  if (alreadyDisplayed.length < 35) {
+    resultsButton.textContent = 'Display Updated Results';
+    var resultsDisplay = document.getElementById('resultsDisplay');
+    renderList();
+  } else {
+    resultsButton.textContent = 'Display Updated Results';
+    var resultsDisplay = document.getElementById('resultsDisplay');
+    resultsDisplay.textContent = 'Left chart displays # of times each item was picked by user AND # of times user was shown each item. Right chart displays the % of the time the user chose each item (times it was clicked/times user was shown item)';
+    createRawClicksChart();
+    createPercentClickedChart();
+  }
+}
