@@ -237,7 +237,7 @@ function createTestProductReport() {
   }
 }
 */
-
+/*
 /*result reporting in list and chart*/
 var listContainer = document.getElementById('list-container');
 
@@ -291,15 +291,15 @@ function createPercentClickedChart() {
       },
     ]
   };
-  for (var i = 0; i < allProducts.length; i ++) {
-    percentBarData.labels.push(allProducts[i].productName);
+  for (var i = 0; i < allProductsArray.length; i ++) {
+    percentBarData.labels.push(allProducts[i].textProductName);
     percentBarData.datasets[0].data.push(allProducts[i].findPercentClicked());
   }
   var percentResults = document.getElementById('percentResultsChart').getContext('2d');
   new Chart(percentResults).Bar(percentBarData);
 }
 function handleButtonClick(event) {
-  if (alreadyDisplayed.length < 14) {
+  if (alreadyDisplayed.length < 35) {
     resultsButton.textContent = 'Display Updated Results';
     var resultsDisplay = document.getElementById('resultsDisplay');
     renderList();
