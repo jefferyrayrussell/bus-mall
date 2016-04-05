@@ -4,24 +4,24 @@
       <title>Bus-Mall</title>
       <link href="style.css" type="text/css" rel="stylesheet">
       <link href="normalize.css" type="text/css" rel="stylesheet">
-      <script src="Chart.js"></script>
+      <script src="chart.js"></script>
     </head>
     <body>
       <header>
         <h1>Bus-Mall Marketing Survey</h1>
       <header>
-
       <section>
         <h3>Which of these three items do you like the best?
         Pick and Click.</h3>
-          <division id="images-container"><division>
+          <div>
+            <img class="grow" id="left-img"></img><img class="grow" id="middle-img"></img><img class="grow" id="right-img"></img>
+          </div>
       </section>
       <div></div>
+      <br />
       <section id="Button-Section">
         <fieldset>
-            <button type="click" name="tenMoreSelections" id="moreSelectionsButton" hidden= "true">Ten More Selections</button>
-            <button type="click" name="seeResults" id="seeResultsButton" hidden= "true">See Results Now</button>
-            <button type="click" name="resetMemory" id="clearLocalStorage">Reset Memory</button>
+            <button type="click" name="tenMoreSelections" id="moreSelectionsButton" hidden= "true">Ten More Selections</button><button type="click" name="seeResults" id="seeResultsButton" hidden= "true">See Results Now</button><button type="click" name="resetMemory" id="clearLocalStorage">Reset Memory</button>
         </fieldset>
       <section/>
       <section id="CanvasChart-Section">

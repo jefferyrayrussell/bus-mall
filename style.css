@@ -5,4 +5,22 @@ body {
 img {
   border: 2px solid black;
   border-radius: 10 px;
+  padding: 20px;
+  transition:all 0.3s ease;
+}
+
+
+
+h3 {
+  padding: 30px;
+}
+
+div {
+
+}
+
+.grow:hover {
+          -webkit-transform: scale(1.3);
+          -ms-transform: scale(1.3);
+          transform: scale(1.3);
 }
