@@ -113,10 +113,6 @@ var renderThreeRandomImagesFunction = function(){
   testProductImagesArray[imageIndex3].numberTimesDisplayed ++;
   totalImagesDisplayed ++;
   randomDisplayImageRight.addEventListener('click', handleClickRight);
-
-  //imagesContainer.appendChild(randomDisplayImageLeft);
-  //imagesContainer.appendChild(randomDisplayImageMiddle);
-  //imagesContainer.appendChild(randomDisplayImageRight);
 };
 
 renderThreeRandomImagesFunction();
@@ -133,6 +129,23 @@ handleUniversalClick = function(){
   console.log('The variable totalImagesDisplayed equals ' + totalImagesDisplayed);
   renderThreeRandomImagesFunction();
   localStorage.setItem('dataPersist', JSON.stringify(allProductsArray));
+  if(totalSelectionsMade < 25) {
+    console.log('Total number of selections: ' + totalSelectionsMade);
+    seeResultsButton.style.display = 'none';
+    selectMoreButton.style.display = 'none';
+  } else if (totalSelectionsMade = 25) {
+    seeResultsButton.style.display = 'block';
+    selectMoreButton.style.display = 'block';
+    console.log('Total number of selections: ' + totalSelectionsMade);
+  } else if (totalSelectionsMade < 35) {
+    seeResultsButton.style.display = 'block';
+    console.log('Total number of selections: ' + totalSelectionsMade);
+  } else {
+    console.log('Total number of selections: ' + totalSelectionsMade);
+    removeImagesFunction();
+    seeResultsButton.style.display = 'none';
+    selectMoreButton.style.display = 'block';
+  }
 };
 
 function handleClickLeft(event) {
@@ -155,7 +168,7 @@ function handleClickRight(event) {
 
 /*After 25 selections two buttons appear.  One button asks the user to see
 results and the other button asks to make 10 more selections.*/
-/*
+
 removeImagesFunction = function (){
   var parent = document.getElementById(imagesContainer);
   var child = document.getElementById(randomDisplayImageLeft);
@@ -165,37 +178,34 @@ removeImagesFunction = function (){
   var child = document.getElementById(randomDisplayImageRight);
   parent.removeChild(randomDisplayImageRight);
 };
-*/
-var buttonsContainer = document.getElementById('buttons-container');
 
-var clearMemoryButton = document.createElement('button');
-var tenSelectionsButton = document.createElement('button');
-var inspectResultsButton = document.createElement('button');
+/* Manage local storage. */
 
-buttonsContainer.appendChild(clearMemoryButton);
-buttonsContainer.appendChild(tenSelectionsButton);
-buttonsContainer.appendChild(inspectResultsButton);
+var resetMemoryButton = document.getElementById('reset-memory');
 
-clearMemoryButton.addEventListener('click', handleClearMemoryButton);
-seeResultsButton.addEventListener('click', handleSeeResultsButtonSelect);
-tenMoreSelectionsButton.addEventListener('click', handleTenMoreSelectionsButtonSelect);
-
-var clearLocalStorage = document.getElementById('clearLocalStorage');
-clearLocalStorage.addEventListener('click', handleResetMemory);
-var handleResetMemory = function() {
+var handleResetMemoryButton = function() {
   console.log('Resetting Local Storage Memory');
   localStorage.clear();
   totalSelectionsMade = 0;
   totalImagesDisplayed = 0;
+  selectMoreButton.style.display = 'block';
+  seeResultsButton.style.display = 'block';
 };
+
+resetMemoryButton.addEventListener('click', handleResetMemoryButton);
+
+/* The conditions when More Selections and See Results buttons are employed.*/
+
+var selectMoreButton = document.getElementById('select-more');
+var seeResultsButton = document.getElementById('see-results');
 
 if(totalSelectionsMade < 25) {
   console.log('Total number of selections: ' + totalSelectionsMade);
   seeResultsButton.style.display = 'none';
-  tenMoreSelectionsButton.style.display = 'none';
+  selectMoreButton.style.display = 'none';
 } else if (totalSelectionsMade = 25) {
   seeResultsButton.style.display = 'block';
-  tenMoreSelectionsButton.style.display = 'block';
+  selectMoreButton.style.display = 'block';
   console.log('Total number of selections: ' + totalSelectionsMade);
 } else if (totalSelectionsMade < 35) {
   seeResultsButton.style.display = 'block';
@@ -204,16 +214,14 @@ if(totalSelectionsMade < 25) {
   console.log('Total number of selections: ' + totalSelectionsMade);
   removeImagesFunction();
   seeResultsButton.style.display = 'none';
-  tenMoreSelectionsButton.style.display = 'block';
+  selectMoreButton.style.display = 'block';
 }
-
-/*The two buttons above require event listeners and handlers. */
 
 /* If the handleTenMoreSelectionsButtonSelect is clicked, then the user receives
 ten more selections. */
-/*
-function handleTenMoreSelectionsButtonSelect(event){
-  tenMoreSelectionsButton.style.display = 'none';
+
+function handleSelectMoreButtonSelect(event){
+  selectMoreButton.style.display = 'none';
   renderThreeRandomImagesFunction();
 }
 
@@ -223,7 +231,7 @@ function handleSeeResultsButtonSelect(event){
   console.log('show me the results now dammit!');
   createTestProductReport();
 }
-*/
+
 /*
 var reportListContainer = document.getElementById('report-list-container');
 function createTestProductReport() {
@@ -239,6 +247,7 @@ function createTestProductReport() {
 */
 /*
 /*result reporting in list and chart*/
+/*
 var listContainer = document.getElementById('list-container');
 
 function renderList() {
@@ -311,3 +320,4 @@ function handleButtonClick(event) {
     createPercentClickedChart();
   }
 }
+*/
