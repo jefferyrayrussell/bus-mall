@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Bus-Mall</title>
+      <title>Bus Mall</title>
       <link href="style.css" type="text/css" rel="stylesheet">
       <link href="normalize.css" type="text/css" rel="stylesheet">
-      <script src="chart.js"></script>
     </head>
     <body>
+
       <header>
-        <h1>Bus-Mall Marketing Survey</h1>
+        <h1>Bus Mall Marketing Survey</h1>
       <header>
-      <section>
-        <h3>Which of these three items do you like the best?
-        Pick and Click.</h3>
+
+      <section id = "Images-Section">
+        <h3> Pick and Click on Your Favorite!</h3>
           <div>
-            <img class="grow" id="left-img"></img><img class="grow" id="middle-img"></img><img class="grow" id="right-img"></img>
+            <img class="grow" id="left-img"></img>
+            <img class="grow" id="middle-img"></img>
+            <img class="grow" id="right-img"></img>
           </div>
       </section>
-      <div></div>
-      <br />
-      <section id="Button-Section">
-        <fieldset>
-            <button type="click" name="tenMoreSelections" id="moreSelectionsButton" hidden= "true">Ten More Selections</button><button type="click" name="seeResults" id="seeResultsButton" hidden= "true">See Results Now</button><button type="click" name="resetMemory" id="clearLocalStorage">Reset Memory</button>
-        </fieldset>
-      <section/>
-      <section id="CanvasChart-Section">
+
+      <section id="Buttons-Section">
+          <button id="reset-memory" name="resetStorage" type="click">Reset Memory</button>
+          <button id="select-more" name="moreSelections" type="click" hidden="true">Make Ten More Selections</button>
+          <button id="see-results" name="seeResults" type="click" hidden="true">See Results Now</button>
+      </section>
+
+      <section id="Chart-Section">
           <canvas id="myChart" width="400" height="400"></canvas>
       </section>
-        <footer>
+
+      <footer>
          <script src="app.js" type="text/javascript"></script>
+         <script src="chart.js"></script>
       </footer>
     </body>
 </html>
