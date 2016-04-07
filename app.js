@@ -7,6 +7,7 @@ var allProductsArray = [];
 var totalImagesDisplayed = 0;
 var totalSelectionsMade = 0;
 
+var imagesContainer;
 var randomDisplayImageLeft;
 var randomDisplayImageMiddle;
 var randomDisplayImageRight;
@@ -82,7 +83,7 @@ generateRandomImagesIndexFunction = function() {
 
 var renderThreeRandomImagesFunction = function(){
 
-  var imagesContainer = document.getElementById('');
+  var imagesContainer = document.getElementById('images-section');
 
   var randomDisplayImageLeft = document.getElementById('left-img');
   var randomDisplayImageMiddle = document.getElementById('middle-img');
@@ -170,7 +171,7 @@ function handleClickRight(event) {
 
 /*After 25 selections two buttons appear.  One button asks the user to see
 results and the other button asks to make 10 more selections.*/
-
+/*
 removeImagesFunction = function (){
   var parent = document.getElementById(imagesContainer);
   var child = document.getElementById(randomDisplayImageLeft);
@@ -180,7 +181,7 @@ removeImagesFunction = function (){
   var child = document.getElementById(randomDisplayImageRight);
   parent.removeChild(randomDisplayImageRight);
 };
-
+*/
 /* Manage local storage. */
 
 var resetMemoryButton = document.getElementById('reset-memory');
@@ -234,7 +235,7 @@ function handleSelectMoreButtonSelect(event){
 var seeResultsButton = document.getElementById('see-results');
 
 function handleSeeResultsButton(event){
-  removeImagesFunction();
+  //removeImagesFunction();
   console.log('show me the results now dammit!');
   createResultsChart();
 }
@@ -255,10 +256,10 @@ function createResultsChart() {
       }
     ]
   };
-  for (var i = 0; i < testProductImagesArray.length; i++) {
-    rawBarData.labels.push(allProducts[i].productName);
-    rawBarData.datasets[0].data.push(allProducts[i].timesClicked);
-    rawBarData.datasets[1].data.push(allProducts[i].timesDisplayed);
+  for (var i = 0; i < allProductsArray.length; i++) {
+    rawBarData.labels.push(allProductsArray[i].testProductName);
+    rawBarData.datasets[0].data.push(allProductsArray[i].numberTimesSelected);
+    rawBarData.datasets[1].data.push(allProductsArray[i].numberTimesDisplayed);
   }
   var rawResults = document.getElementById('Chart-Section').getContext('2d');
   new Chart(rawResults).Bar(rawBarData);
@@ -275,7 +276,7 @@ function createPercentClickedChart() {
     ]
   };
   for (var i = 0; i < testProductImagesArray.length; i ++) {
-    percentBarData.labels.push(allProducts[i].textProductName);
+    percentBarData.labels.push(allProducts[i].testProductName);
     percentBarData.datasets[0].data.push(allProducts[i].findPercentClicked());
   }
   var percentResults = document.getElementById('percentResultsChart').getContext('2d');
