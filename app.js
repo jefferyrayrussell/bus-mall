@@ -129,10 +129,12 @@ handleUniversalClick = function(){
   console.log('The variable totalImagesDisplayed equals ' + totalImagesDisplayed);
   renderThreeRandomImagesFunction();
   localStorage.setItem('dataPersist', JSON.stringify(allProductsArray));
+};
+/*
   if(totalSelectionsMade < 25) {
     console.log('Total number of selections: ' + totalSelectionsMade);
     seeResultsButton.style.display = 'none';
-    selectMoreButton.style.display = 'none';
+    //selectMoreButton.style.display = 'none';
   } else if (totalSelectionsMade = 25) {
     seeResultsButton.style.display = 'block';
     selectMoreButton.style.display = 'block';
@@ -147,7 +149,7 @@ handleUniversalClick = function(){
     selectMoreButton.style.display = 'block';
   }
 };
-
+*/
 function handleClickLeft(event) {
   testProductImagesArray[imageIndex1].numberTimesSelected++;
   console.log(testProductImagesArray[imageIndex1]);
@@ -188,26 +190,29 @@ var handleResetMemoryButton = function() {
   localStorage.clear();
   totalSelectionsMade = 0;
   totalImagesDisplayed = 0;
-  selectMoreButton.style.display = 'block';
+  //selectMoreButton.style.display = 'block';
   seeResultsButton.style.display = 'block';
 };
 
 resetMemoryButton.addEventListener('click', handleResetMemoryButton);
 
 /* The conditions when More Selections and See Results buttons are employed.*/
+/* Difficulty in getting this to work properly. The buttons appear after 25
+selections, but they do not disappear after selections are made.*/
 
-var selectMoreButton = document.getElementById('select-more');
-var seeResultsButton = document.getElementById('see-results');
+//var selectMoreButton = document.getElementById('select-more');
 
+/*
 if(totalSelectionsMade < 25) {
   console.log('Total number of selections: ' + totalSelectionsMade);
   seeResultsButton.style.display = 'none';
   selectMoreButton.style.display = 'none';
-} else if (totalSelectionsMade = 25) {
+}else if (totalSelectionsMade = 25) {
   seeResultsButton.style.display = 'block';
   selectMoreButton.style.display = 'block';
   console.log('Total number of selections: ' + totalSelectionsMade);
-} else if (totalSelectionsMade < 35) {
+}
+else if (totalSelectionsMade < 35) {
   seeResultsButton.style.display = 'block';
   console.log('Total number of selections: ' + totalSelectionsMade);
 } else {
@@ -216,56 +221,25 @@ if(totalSelectionsMade < 25) {
   seeResultsButton.style.display = 'none';
   selectMoreButton.style.display = 'block';
 }
-
-/* If the handleTenMoreSelectionsButtonSelect is clicked, then the user receives
-ten more selections. */
-
+*/
+// If the handleTenMoreSelectionsButtonSelect is clicked, then the user receives
+// ten more selections.
+/*
 function handleSelectMoreButtonSelect(event){
   selectMoreButton.style.display = 'none';
   renderThreeRandomImagesFunction();
 }
+*/
 
-function handleSeeResultsButtonSelect(event){
-  seeResultsButton.style.display = 'none';
+var seeResultsButton = document.getElementById('see-results');
+
+function handleSeeResultsButton(event){
   removeImagesFunction();
   console.log('show me the results now dammit!');
-  createTestProductReport();
+  createResultsChart();
 }
 
-/*
-var reportListContainer = document.getElementById('report-list-container');
-function createTestProductReport() {
-  testProductReport.textContent = '';
-  var testProductReport = document.createElement('ul');
-  for (var i = 0; i < allProductsArray.length; i++) {
-    allProducts[i].calculatePercentageSelected();
-    var testProductReport = document.createElement('li');
-    testProductReport.textContent = allProducts[i].testProductName + ' has receieved ' + allProducts[i].numberTimesSelected + ' selections after being displayed ' + allProducts[i].numberTimesDisplayed + ' times, for a ' + allProducts[i].calculatePercentageSelected() + '% selection rate';
-    testProductReport.appendChild(reportlistContainer);
-  }
-}
-*/
-/*
-/*result reporting in list and chart*/
-/*
-var listContainer = document.getElementById('list-container');
-
-function renderList() {
-  resultsDisplay.textContent = '';
-  //var errorMessage = document.createElement('p');
-  //errorMessage.textContent = 'You can click "Display Updated Results" to render this in a chart once //all ' + allProducts.length + ' products have been displayed at least once (you will have to click an //item one last time once your final item appears before updating as well). Thus far, ' + //alreadyDisplayed.length + ' products have been displayed.';
-  resultsDisplay.appendChild(listContainer);
-  var displayList = document.createElement('ul');
-  for (var i = 0; i < allProducts.length; i++) {
-    allProducts[i].findPercentClicked();
-    var productResults = document.createElement('li');
-    productResults.textContent = allProducts[i].productName + ' has receieved ' + allProducts[i].timesClicked + ' clicks after being displayed ' + allProducts[i].timesDisplayed + ' times, for a ' + allProducts[i].findPercentClicked() + '% selection rate';
-    displayList.appendChild(productResults);
-  }
-  resultsDisplay.appendChild(displayList);
-}
-
-function createRawClicksChart() {
+function createResultsChart() {
   var rawBarData = {
     labels : [],
     datasets : [
@@ -281,12 +255,12 @@ function createRawClicksChart() {
       }
     ]
   };
-  for (var i = 0; i < allProducts.length; i++) {
+  for (var i = 0; i < testProductImagesArray.length; i++) {
     rawBarData.labels.push(allProducts[i].productName);
     rawBarData.datasets[0].data.push(allProducts[i].timesClicked);
     rawBarData.datasets[1].data.push(allProducts[i].timesDisplayed);
   }
-  var rawResults = document.getElementById('rawResultsChart').getContext('2d');
+  var rawResults = document.getElementById('Chart-Section').getContext('2d');
   new Chart(rawResults).Bar(rawBarData);
 }
 function createPercentClickedChart() {
@@ -300,7 +274,7 @@ function createPercentClickedChart() {
       },
     ]
   };
-  for (var i = 0; i < allProductsArray.length; i ++) {
+  for (var i = 0; i < testProductImagesArray.length; i ++) {
     percentBarData.labels.push(allProducts[i].textProductName);
     percentBarData.datasets[0].data.push(allProducts[i].findPercentClicked());
   }
@@ -320,4 +294,4 @@ function handleButtonClick(event) {
     createPercentClickedChart();
   }
 }
-*/
+seeResultsButton.addEventListener('click', handleSeeResultsButton);

@@ -9,8 +9,13 @@ img {
   transition:all 0.3s ease;
 }
 
-div {
-  padding: 20px;
+.images {
+  margin: 50px;
+}
+
+section {
+  margin: 20px;
+  padding: 40px;
 }
 
 .grow:hover {
@@ -21,5 +26,5 @@ div {
 
 button {
   padding: 10px;
-  margin-top: 25px;
+  margin-top: 50px;
 }
